@@ -17,32 +17,33 @@ public class MainApp {
 
       UserService userService = context.getBean(UserService.class);
 
-      userService.add(new User("User1", "Lastname1", "user1@mail.ru"));
-      userService.add(new User("User2", "Lastname2", "user2@mail.ru"));
-      userService.add(new User("User3", "Lastname3", "user3@mail.ru"));
-      userService.add(new User("User4", "Lastname4", "user4@mail.ru"));
+      Car car1 = new Car("BMW", 6);
+      User user1 = new User("User1", "Lastname1", "user1@mail.ru", car1);
+      car1.setUser(user1);
+      userService.add(user1);
 
-      userService.add(new User("User5", "Lastname5", "user5@mail.ru",
-              new Car("Ford", 12)));
-      userService.add(new User("User6", "Lastname6", "user6@mail.ru",
-              new Car("Renault", 2)));
-      userService.add(new User("User7", "Lastname7", "user7@mail.ru",
-              new Car("BMW", 6)));
-      userService.add(new User("User8", "Lastname8", "user8@mail.ru",
-              new Car("Toyota", 5)));
+      Car car2 = new Car("Renault", 2);
+      User user2 = new User("User2", "Lastname2", "user2@mail.ru", car2);
+      car2.setUser(user2);
+      userService.add(user2);
+
+      Car car3 = new Car("Toyota", 5);
+      User user3 = new User("User3", "Lastname3", "user3@mail.ru", car3);
+      car3.setUser(user3);
+      userService.add(user3);
 
       List<User> users = userService.listUsers();
       for (User user : users) {
-         System.out.println("Id = "+user.getId());
-         System.out.println("First Name = "+user.getFirstName());
-         System.out.println("Last Name = "+user.getLastName());
-         System.out.println("Email = "+user.getEmail());
-         System.out.println(user.toString());
+         System.out.println("Id = " + user.getId());
+         System.out.println("First Name = " + user.getFirstName());
+         System.out.println("Last Name = " + user.getLastName());
+         System.out.println("Email = " + user.getEmail());
+         System.out.println("Car`s model = " + user.getCar().getModel());
+         System.out.println("Car`s series = " + user.getCar().getSeries());
          System.out.println();
       }
 
-      
-      System.out.println("Автомобилем BMW 6-й серии владеет: " + userService.getUserOfCarModelAndNumber("BMW", 6).toString());
+      System.out.println("Our request " + userService.getUserOfCarModelAndNumber("BMW", 6).toString());
 
       context.close();
    }
